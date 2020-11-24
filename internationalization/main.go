@@ -9,20 +9,27 @@ import (
 )
 
 func main() {
+	loc := Init("en.json")
+
 	params := map[string]interface{}{
 		"Name":  "Alex",
 		"Count": 10,
 	}
-	fmt.Println(t("dashboard.messages", params, 3))
+
+	fmt.Println(Translate(loc, "dashboard.messages", params, 3))
+	fmt.Println(Translate(loc, "hello_world", params, 3))
 }
 
-func t(message_id string, params map[string]interface{}, messageCount int) string {
+func Init(fileName string) *i18n.Localizer {
 	bundle := i18n.NewBundle(language.English)
 	bundle.RegisterUnmarshalFunc("json", json.Unmarshal)
-	bundle.MustLoadMessageFile("en.json")
-	localizer := i18n.NewLocalizer(bundle, "en")
+	bundle.MustLoadMessageFile(fileName)
+	loc := i18n.NewLocalizer(bundle, "en")
+	return loc
+}
 
-	translation := localizer.MustLocalize(&i18n.LocalizeConfig{
+func Translate(loc *i18n.Localizer, message_id string, params map[string]interface{}, messageCount int) string {
+	translation := loc.MustLocalize(&i18n.LocalizeConfig{
 		MessageID:    message_id,
 		TemplateData: params,
 		PluralCount:  messageCount,
