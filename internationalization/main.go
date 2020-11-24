@@ -28,9 +28,9 @@ func Init(fileName string) *i18n.Localizer {
 	return loc
 }
 
-func Translate(loc *i18n.Localizer, message_id string, params map[string]interface{}, messageCount int) string {
+func Translate(loc *i18n.Localizer, messageID string, params map[string]interface{}, messageCount int) string {
 	translation := loc.MustLocalize(&i18n.LocalizeConfig{
-		MessageID:    message_id,
+		MessageID:    messageID,
 		TemplateData: params,
 		PluralCount:  messageCount,
 	})
