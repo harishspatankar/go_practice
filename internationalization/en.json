@@ -1,8 +1,0 @@
-{
-  "hello_world": "Hello World",
-  "dashboard": {
-    "messages": {
-      "other": "{{.Name}} has {{.Count}} messages."
-    }
-  }
-}
